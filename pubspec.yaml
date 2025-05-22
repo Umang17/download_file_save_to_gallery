@@ -1,7 +1,9 @@
 name: download_file_and_save_to_gallery
 description: "A new Flutter package project."
 version: 1.0.0
-homepage:
+homepage: https://github.com/Umang17/download_file_save_to_gallery
+repository: https://github.com/Umang17/download_file_save_to_gallery
+issue_tracker: https://github.com/Umang17/download_file_save_to_gallery/issues
 
 environment:
   sdk: ^3.5.4
@@ -26,6 +28,13 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.downloadfile.save
+        pluginClass: GalleryDownloaderPlugin
+      ios:
+        pluginClass: GalleryDownloaderPlugin
 
   # To add assets to your package, add an assets section, like this:
   # assets:

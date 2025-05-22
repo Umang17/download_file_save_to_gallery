@@ -11,29 +11,91 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/to/develop-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+A lightweight Flutter plugin to download any file (image, video, etc.) from a URL and save it directly to the gallery, with real-time progress updates and permission handling.
 
-## Features
+✨ Features
+✅ Downloads files with progress feedback
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+🖼️ Saves images/videos to the gallery
 
-## Getting started
+📱 Handles Android & iOS permissions automatically
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+⚙️ Customizable progress callback
 
-## Usage
+🔐 Supports Android 13+ scoped storage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+🚀 Getting Started
+Prerequisites
+Flutter SDK 3.10 or higher
 
-```dart
-const like = 'sample';
-```
+Android SDK 21+
 
-## Additional information
+iOS 11.0 or higher
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+Add Dependency
+In your pubspec.yaml:
+
+yaml
+Copy
+Edit
+dependencies:
+gallery_downloader: ^1.0.0
+Then run:
+
+bash
+Copy
+Edit
+flutter pub get
+📦 Usage
+Example
+dart
+Copy
+Edit
+final result = await GalleryDownloader.downloadAndSaveToGallery(
+fileUrl: 'https://example.com/sample.jpg',
+onReceiveProgress: (received, total) {
+double progress = received / total * 100;
+print('Downloading: ${progress.toStringAsFixed(0)}%');
+},
+);
+
+if (result['success']) {
+print('File saved at: ${result['filePath']}');
+} else {
+print('Error: ${result['message']}');
+}
+🔧 You can find a full example in the example/ folder.
+
+🔐 Permissions
+This plugin automatically handles permission requests using permission_handler:
+
+On Android 13+, no storage permission is needed
+
+On Android ≤ 12, storage permission is requested
+
+On iOS, no extra permission is required
+
+Make sure to update your AndroidManifest.xml:
+
+xml
+Copy
+Edit
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+android:maxSdkVersion="28"/>
+And also configure minSdkVersion in android/app/build.gradle:
+
+gradle
+Copy
+Edit
+defaultConfig {
+minSdkVersion 21
+}
+📚 Additional Information
+🔗 GitHub Repository: View on GitHub
+
+🐞 Found a bug? Submit an issue
+
+❤️ Contributions are welcome! Submit PRs or open issues.
+
+🛠 Maintained by [yourusername]
